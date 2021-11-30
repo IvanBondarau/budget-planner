@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import {UserService} from "../../../../core/services/user.service";
+import {Observable, observable, Subscription} from "rxjs";
+import {User} from "../../../../core/models/user.model";
 
 @Component({
   selector: 'app-login-form',
@@ -13,20 +15,21 @@ export class LoginFormComponent implements OnInit {
     password: new FormControl('')
   });
 
-  errorText: string | null = 'ЛИЗА ХУЙ';
+  errorText: string | null = null;
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
   }
 
-  async onSubmit() {
-    await this.userService.login(this.loginForm.value)
-    if (this.userService.activeUser != null) {
-      this.errorText = 'OK'
-    } else  {
-      this.errorText = 'Error'
+  onSubmit() {
+    const observer = {
+      next: (user: User) => {},
+      error: (err: any) => { this.errorText = 'Text' },
+      complete: () => console.log('Login complete'),
     }
+
+    this.userService.login(this.loginForm.value).subscribe(observer)
   }
 
 }

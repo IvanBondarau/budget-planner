@@ -41,18 +41,18 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User read(Long id) {
-        Map<String, Object> params = Map.of("id", id);
-        return jdbcTemplate.queryForObject("select * from user where id = :id", params, User.class);
-    }
-
-    @Override
-    public Long save(User user) {
+    public Long create(User user) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         Map<String, Object> params = new ObjectMapper().convertValue(user, Map.class);
         SqlParameterSource parameterSource = new MapSqlParameterSource(params);
         jdbcTemplate.update("insert into user(username, email, password) values(:username, :email, :password)", parameterSource, keyHolder);
         return keyHolder.getKey().longValue();
+    }
+
+    @Override
+    public User read(Long id) {
+        Map<String, Object> params = Map.of("id", id);
+        return jdbcTemplate.queryForObject("select * from user where id = :id", params, User.class);
     }
 
     @Override

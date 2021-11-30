@@ -8,22 +8,24 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonsModule } from 'ngx-bootstrap/buttons'
 
 import { BrowserModule } from '@angular/platform-browser';
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
     LoginFormComponent,
     LoginPageComponent
   ],
-  imports: [
-    BrowserModule,
-    ButtonsModule,
+    imports: [
+        BrowserModule,
+        ButtonsModule,
 
-    CommonModule,
-    CoreModule,
+        CommonModule,
+        CoreModule,
 
-    FlexLayoutModule,
-    ReactiveFormsModule
-  ],
+        FlexLayoutModule,
+        ReactiveFormsModule,
+        RouterModule
+    ],
   exports: [
     LoginFormComponent,
     LoginPageComponent

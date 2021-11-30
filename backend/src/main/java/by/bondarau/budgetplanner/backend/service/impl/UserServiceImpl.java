@@ -31,13 +31,12 @@ public class UserServiceImpl implements UserService {
         }
         User user = loginResult.get();
         return mapper.map(user, UserDto.class);
-
     }
 
     @Override
     public UserDto register(RegisterDto registerDto) {
         User user = mapper.map(registerDto, User.class);
-        Long id = userDao.save(user);
+        Long id = userDao.create(user);
         user.setId(id);
         return mapper.map(user, UserDto.class);
     }

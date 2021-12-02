@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{budget?.name}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">
+      Created: {{this.date}}
+    </h6>
+    <div class="d-flex flex-row">
+      <button class="btn btn-primary">View</button>
+      <button class="btn btn-primary ms-3" (click)="deletePressed()">Delete</button>
+    </div>
+  </div>
+</div>

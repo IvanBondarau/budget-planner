@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {UserService} from "../../../core/services/user.service";
-import {RegisterData} from "../../../core/models/register-data.model";
+import {UserService} from "../../../../core/services/user.service";
+import {RegisterData} from "../../../../core/models/register-data.model";
 
 @Component({
   selector: 'app-signup-form',

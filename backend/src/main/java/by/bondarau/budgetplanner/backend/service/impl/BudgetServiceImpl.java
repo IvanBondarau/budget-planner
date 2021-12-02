@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,8 +36,14 @@ public class BudgetServiceImpl implements BudgetService {
     @Override
     public BudgetDto create(BudgetCreateDto dto) {
         Budget budget = mapper.map(dto, Budget.class);
+        budget.setCreationDate(new Date());
         Long id = dao.create(budget);
         budget.setId(id);
         return mapper.map(budget, BudgetDto.class);
+    }
+
+    @Override
+    public void delete(Long id) {
+        this.dao.delete(id);
     }
 }

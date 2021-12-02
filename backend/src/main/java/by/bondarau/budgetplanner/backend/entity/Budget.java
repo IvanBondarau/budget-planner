@@ -8,6 +8,9 @@ public class Budget {
     private String name;
     private Date creationDate;
 
+    public Budget() {
+    }
+
     public Budget(Long userId, String name, Date creationDate) {
         this.userId = userId;
         this.name = name;

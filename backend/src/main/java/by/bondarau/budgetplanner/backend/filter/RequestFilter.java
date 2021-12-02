@@ -20,6 +20,7 @@ public class RequestFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         httpServletResponse.addHeader("Access-Control-Allow-Origin", "*");
         httpServletResponse.addHeader("Access-Control-Allow-Headers", "Content-Type");
+        httpServletResponse.addHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT, OPTIONS");
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 }

@@ -4,7 +4,9 @@ import by.bondarau.budgetplanner.backend.dto.LoginDto;
 import by.bondarau.budgetplanner.backend.dto.RegisterDto;
 import by.bondarau.budgetplanner.backend.dto.UserDto;
 import by.bondarau.budgetplanner.backend.service.UserService;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +29,11 @@ public class UserController {
     @PostMapping("/login")
     public UserDto login(@RequestBody LoginDto dto) {
         return userService.login(dto);
+    }
+
+    @PutMapping("/{id}")
+    public UserDto updateUser(@PathVariable Long id,@RequestBody UserDto dto) {
+        return userService.updateUser(id, dto);
     }
 
 

@@ -52,13 +52,14 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User read(Long id) {
         Map<String, Object> params = Map.of("id", id);
-        return jdbcTemplate.queryForObject("select * from user where id = :id", params, User.class);
+        return jdbcTemplate.query("select * from user where id = :id", new MapSqlParameterSource(params),
+                new BeanPropertyRowMapper<>(User.class)).get(0);
     }
 
     @Override
     public void update(User user) {
         SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(user);
-        jdbcTemplate.update("update user set username = :username, email = :email, password = :password where id = :id", parameterSource);
+        jdbcTemplate.update("update user set username = :username, email = :email where id = :id", parameterSource);
     }
 
     @Override

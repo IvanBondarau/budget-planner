@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import {UserService} from "../../../../core/services/user.service";
 import {Observable, observable, Subscription} from "rxjs";
-import {User} from "../../../../core/models/user.model";
+import {UserModel} from "../../../../core/models/user.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login-form',
@@ -17,15 +18,17 @@ export class LoginFormComponent implements OnInit {
 
   errorText: string | null = null;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
     const observer = {
-      next: (user: User) => {},
-      error: (err: any) => { this.errorText = 'Text' },
+      next: (user: UserModel) => {
+        this.router.navigate(['/budgets'])
+      },
+      error: (err: any) => { this.errorText = err?.message },
       complete: () => console.log('Login complete'),
     }
 

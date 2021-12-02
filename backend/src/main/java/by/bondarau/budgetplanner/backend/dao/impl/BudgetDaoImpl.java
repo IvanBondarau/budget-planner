@@ -36,7 +36,7 @@ public class BudgetDaoImpl implements BudgetDao {
     public Long create(Budget entity) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(
-                "insert into budget(user_id, name, creation_date) values(:user_id, :name, :creation_date)",
+                "insert into budget(user_id, name, creation_date) values(:userId, :name, :creationDate)",
                 new BeanPropertySqlParameterSource(entity), keyHolder);
         return keyHolder.getKey().longValue();
     }
@@ -48,7 +48,10 @@ public class BudgetDaoImpl implements BudgetDao {
 
     @Override
     public void delete(Long id) {
-
+        int rows = jdbcTemplate.update("delete from budget where id = :id", Map.of("id", id));
+        if (rows != 1) {
+            throw new RuntimeException("Invalid delete");
+        }
     }
 
     @Override

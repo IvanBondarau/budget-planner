@@ -40,4 +40,12 @@ public class UserServiceImpl implements UserService {
         user.setId(id);
         return mapper.map(user, UserDto.class);
     }
+
+    @Override
+    public UserDto updateUser(Long id, UserDto userDto) {
+        User user = mapper.map(userDto, User.class);
+        user.setId(id);
+        userDao.update(user);
+        return mapper.map(user, UserDto.class);
+    }
 }

@@ -1,0 +1,86 @@
+<div class="card w-100 mb-2">
+  <div class="card-body">
+    <div class="d-flex flex-row my-auto  align-items-center">
+      <button [attr.data-bs-target]="'#card-body-' + [category.id]"
+              aria-expanded="true"
+              class="btn btn-primary" data-bs-toggle="collapse" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-eye-fill" viewBox="0 0 16 16">
+          <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+          <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+        </svg>
+      </button>
+      <div class="h-100 my-auto ms-2">
+        <span class="h5">{{category.name}}</span>
+      </div>
+
+      <div class="flex-grow-1 d-flex flex-row-reverse me-3">
+        <button [attr.data-bs-target]="'#card-body-' + [category.id]"
+                aria-expanded="true"
+                class="btn btn-danger" data-bs-toggle="collapse" type="button" (click)="onDelete()">
+          <svg class="bi bi-trash2-fill" fill="white" height="16" viewBox="0 0 16 16" width="16"
+               xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225zm9.89-.69C10.966 2.214 9.578 2 8 2c-1.58 0-2.968.215-3.926.534-.477.16-.795.327-.975.466.18.14.498.307.975.466C5.032 3.786 6.42 4 8 4s2.967-.215 3.926-.534c.477-.16.795-.327.975-.466-.18-.14-.498-.307-.975-.466z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="collapse" id="card-body-{{category.id}}">
+      <hr>
+      <div class="row w-100 ps-3 my-2">
+        <div class="col-5 my-auto">
+          <span class="h6">Name</span>
+        </div>
+        <div class="col-4 my-auto">
+          <span class="h6">Value</span>
+        </div>
+        <div class="col-3">
+
+        </div>
+      </div>
+      <div *ngFor="let item of category.items" class="card mb-2">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-5 my-auto">
+              <span>{{item.name}}</span>
+            </div>
+            <div class="col-4 my-auto">
+              <span>{{item.value}}</span>
+            </div>
+            <div class="col-3 d-flex flex-row-reverse">
+              <button class="btn btn-danger" type="button" (click)="removeItem(item)">
+                <svg class="bi bi-trash2-fill" fill="white" height="16" viewBox="0 0 16 16" width="16"
+                     xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225zm9.89-.69C10.966 2.214 9.578 2 8 2c-1.58 0-2.968.215-3.926.534-.477.16-.795.327-.975.466.18.14.498.307.975.466C5.032 3.786 6.42 4 8 4s2.967-.215 3.926-.534c.477-.16.795-.327.975-.466-.18-.14-.498-.307-.975-.466z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <form [formGroup]="addItemForm" (ngSubmit)="addItem()">
+        <div class="row w-100 ms-0">
+          <div class="col-5 my-auto ps-0">
+            <input type="text" class="form-control" id="name" placeholder="Name" formControlName="name">
+          </div>
+          <div class="col-4 my-auto ps-0">
+            <input type="text" class="form-control" id="value" placeholder="Value" formControlName="value">
+          </div>
+          <div class="col-3 my-auto d-flex flex-row-reverse pe-3">
+              <button type="submit" class="btn btn-success">
+                <span class="me-2" *ngIf="category.typeId == 0">Add income</span>
+                <span class="me-2" *ngIf="category.typeId == 1">Add expense</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                </svg>
+              </button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

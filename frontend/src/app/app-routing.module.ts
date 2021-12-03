@@ -8,11 +8,13 @@ import {BudgetModule} from "./modules/budget/budget.module";
 import {BudgetListPageComponent} from "./modules/budget/components/budget-list-page/budget-list-page.component";
 import {ProfileModule} from "./modules/profile/profile.module";
 import {UserProfileComponent} from "./modules/profile/components/user-profile/user-profile.component";
+import {BudgetPageComponent} from "./modules/budget/components/budget-page/budget-page.component";
 
 const routes: Routes = [
   { path: "login", component: LoginPageComponent },
   { path: "register", component: SignupPageComponent },
   { path: 'budgets', component: BudgetListPageComponent },
+  { path: 'budget', component: BudgetPageComponent },
   { path: 'profile', component: UserProfileComponent }
 ];
 

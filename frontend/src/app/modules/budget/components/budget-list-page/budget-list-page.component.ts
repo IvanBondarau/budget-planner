@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {BudgetModel} from "../../models/budget.model";
 import {BudgetService} from "../../services/budget.service";
 import {FormControl, FormGroup} from "@angular/forms";
+import {Router} from "@angular/router";
+import {CategoryModel} from "../../models/category.model";
 
 @Component({
   selector: 'app-budget-page',
@@ -10,14 +12,14 @@ import {FormControl, FormGroup} from "@angular/forms";
 })
 export class BudgetListPageComponent implements OnInit {
 
-  budgets: Array<BudgetModel> = Array.of();
+  budgets!: Array<BudgetModel>;
 
   budgetForm = new FormGroup({
       name: new FormControl('')
     }
   )
 
-  constructor(private budgetService: BudgetService) { }
+  constructor(private budgetService: BudgetService, private router: Router) { }
 
   ngOnInit(): void {
     this.refreshBudgets()
@@ -46,5 +48,11 @@ export class BudgetListPageComponent implements OnInit {
       }
     );
   }
+
+  selectBudget(id: number) {
+    console.log("Id: " + id);
+    this.router.navigate(['/budget'], { queryParams: { id: id } })
+  }
+
 
 }

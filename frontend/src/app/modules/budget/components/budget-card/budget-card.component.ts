@@ -9,6 +9,7 @@ export class BudgetCardComponent implements OnInit {
 
   @Input() budget: BudgetModel | null = null;
   @Output() deleteButtonEvent: EventEmitter<number> = new EventEmitter<number>()
+  @Output() cardSelected: EventEmitter<number> = new EventEmitter<number>()
 
   date = '';
 
@@ -24,6 +25,11 @@ export class BudgetCardComponent implements OnInit {
 
   deletePressed() {
     this.deleteButtonEvent.emit(this.budget?.id)
+  }
+
+  selected() {
+    console.log(this.budget?.id)
+    this.cardSelected.emit(this.budget?.id)
   }
 
 }

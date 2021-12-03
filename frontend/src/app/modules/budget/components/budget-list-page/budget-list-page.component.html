@@ -1,7 +1,11 @@
 <div class="row mt-md-5">
   <div class="col-2"></div>
   <div class="col-4 d-flex flex-column">
-    <app-budget-card class="mb-3" *ngFor="let budget of budgets" [budget]="budget" (deleteButtonEvent)="deleteBudget($event)"></app-budget-card>
+    <app-budget-card class="mb-3" *ngFor="let budget of budgets" [budget]="budget"
+                     (deleteButtonEvent)="deleteBudget($event)"
+                    (cardSelected)="selectBudget($event)">
+
+    </app-budget-card>
   </div>
   <div class="col-4 d-flex flex-column">
     <div class="card">

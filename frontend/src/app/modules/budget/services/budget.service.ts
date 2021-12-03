@@ -3,6 +3,7 @@ import {UserService} from "../../../core/services/user.service";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
 import {BudgetModel} from "../models/budget.model";
+import {BudgetInfoModel} from "../models/budget-info.model";
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +44,14 @@ export class BudgetService {
   deleteBudget(id: number) {
     return this.httpClient.delete(environment.apiHost + "/budget/" + id);
 
+  }
+
+
+  getBudgetInfo(id: number) {
+    return this.httpClient.get<BudgetInfoModel>(environment.apiHost + "/budget/" + id);
+  }
+
+  save(budget: BudgetInfoModel) {
+    return this.httpClient.put<BudgetInfoModel>(environment.apiHost + "/budget/" + budget.id, budget);
   }
 }

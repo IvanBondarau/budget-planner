@@ -1,0 +1,66 @@
+<div class="container-fluid mt-3">
+  <div class="row">
+    <div class="col-12">
+      <div class="card w-100">
+        <div class="card-body">
+          <div class="container-fluid d-flex flex-row">
+            <h5 class="card-title mt-2">{{ 'Budget ' + budget.name }}</h5>
+
+            <button type="button" class="btn btn-outline-primary ms-3" (click)="saveBudget()">
+              Save
+            </button>
+          </div>
+          <hr>
+          <div class="container-fluid row mt-2 px-0 mx-1">
+            <div class="col-6">
+              <app-category-card *ngFor="let income of budget.incomes" [category]="income" (removeCard)="removeCategory($event)"></app-category-card>
+              <div class="card w-100">
+                <div class="card-body">
+                  <form [formGroup]="addCategoryForm" (ngSubmit)="addCategory(0)">
+                    <div class="row w-100 ms-0">
+                      <div class="col-9 my-auto ps-0">
+                        <input type="text" class="form-control" id="name" placeholder="Name" formControlName="name">
+                      </div>
+                      <div class="col-3 my-auto d-flex flex-row-reverse pe-3">
+                        <button type="submit" class="btn btn-success">
+                          Add category
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <app-category-card *ngFor="let expense of budget.expenses" [category]="expense" (removeCard)="removeCategory($event)" ></app-category-card>
+              <div class="card w-100">
+                <div class="card-body">
+                  <form [formGroup]="addCategoryForm" (ngSubmit)="addCategory(1)">
+                    <div class="row w-100 ms-0">
+                      <div class="col-9 my-auto ps-0">
+                        <input type="text" class="form-control" id="cat_name" placeholder="Name" formControlName="name">
+                      </div>
+                      <div class="col-3 my-auto d-flex flex-row-reverse pe-3">
+                        <button type="submit" class="btn btn-success">
+                          Add category
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

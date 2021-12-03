@@ -20,7 +20,7 @@ import java.util.Map;
 @Repository
 public class BudgetDaoImpl implements BudgetDao {
 
-    private NamedParameterJdbcTemplate jdbcTemplate;
+    private final NamedParameterJdbcTemplate jdbcTemplate;
 
     @Autowired
     public BudgetDaoImpl(NamedParameterJdbcTemplate jdbcTemplate) {
@@ -29,7 +29,11 @@ public class BudgetDaoImpl implements BudgetDao {
 
     @Override
     public Budget read(Long id) {
-        return null;
+        return jdbcTemplate.query(
+                "select * from budget where id = :id",
+                new MapSqlParameterSource(Map.of("id", id)),
+                new BeanPropertyRowMapper<>(Budget.class)
+        ).get(0);
     }
 
     @Override

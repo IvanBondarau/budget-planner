@@ -1,9 +1,9 @@
 export class BudgetModel {
 
   constructor(
-    public id: number,
-    public name: string,
-    public creationDate: Date
+    public id: number = 0,
+    public name: string = '',
+    public creationDate: Date = new Date()
   ) {
   }
 }

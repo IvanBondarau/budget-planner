@@ -22,6 +22,10 @@ export class BudgetPageComponent implements OnInit {
     }
   )
 
+  colorSchemeIncome = {
+    domain: ['#007f5f', '#2b9348', '#55a630', '#80b918', '#AACC00', '#BFD200']
+  };
+
   constructor(private route: ActivatedRoute, private budgetService: BudgetService) {
     route.queryParams.subscribe(
       {
@@ -83,6 +87,40 @@ export class BudgetPageComponent implements OnInit {
         next: value => console.log("dadajndaad")
       }
     );
+  }
+
+  get incomesTotal() {
+    let res = []
+    for (const category of this.budget.incomes) {
+      let sum = 0;
+      for (const item of category.items) {
+        sum += item.value
+      }
+      res.push(
+        {
+          "name": category.name,
+          "value": sum
+        }
+      )
+    }
+    return res;
+  }
+
+  get expensesTotal() {
+    let res = []
+    for (const category of this.budget.expenses) {
+      let sum = 0;
+      for (const item of category.items) {
+        sum += item.value
+      }
+      res.push(
+        {
+          "name": category.name,
+          "value": sum
+        }
+      )
+    }
+    return res;
   }
 
 }

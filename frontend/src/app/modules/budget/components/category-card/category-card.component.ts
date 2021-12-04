@@ -43,4 +43,12 @@ export class CategoryCardComponent implements OnInit {
     this.removeCard.emit(this.category)
   }
 
+  getTotal() {
+    let sum = 0;
+    for (const item of this.category.items) {
+      sum += item.value
+    }
+    return sum;
+  }
+
 }

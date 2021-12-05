@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../../../core/services/user.service";
 import {Router} from "@angular/router";
 
@@ -12,7 +12,7 @@ export class UserProfileComponent implements OnInit {
 
   userProfileForm = new FormGroup({
     username: new FormControl(),
-    email: new FormControl()
+    email: new FormControl('', [Validators.required])
   })
 
   constructor(private userService: UserService, private router: Router) { }
@@ -32,6 +32,9 @@ export class UserProfileComponent implements OnInit {
   }
 
   updateUser() {
+    if (!this.userProfileForm.dirty) {
+      return
+    }
     let user = this.userService.activeUser
     if (user == null) {
       throw "User not authenticated";

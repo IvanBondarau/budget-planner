@@ -2,29 +2,28 @@
 
 <div class="card w-75" >
   <div class="card-body">
-    <h5 class="text-center">Sign in</h5>
+    <h5 class="text-center">Войти</h5>
     <hr>
     <div class="mt-3">
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="mb-3">
-          <label for="floatingInput" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="name">
+          <label for="floatingInput" class="form-label">Имя пользователя</label>
+          <input type="email" class="form-control" id="floatingInput" placeholder="Имя пользователя" formControlName="name" required>
         </div>
         <div class="mb-3">
-          <label for="floatingPassword" class="form-label">Password</label>
-          <input type="password" class="form-control" id="floatingPassword" placeholder="Password" formControlName="password">
+          <label for="floatingPassword" class="form-label">Пароль</label>
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Пароль" formControlName="password" required>
         </div>
         <p *ngIf="errorText != null" class="text-center mb3 text-danger">
           {{ [errorText] }}
         </p>
-        <p class="text-center mb-3"><a href="#" class="card-link text-decoration-none">Forgot password?</a></p>
         <div class="text-center mb-3">
-          <button type="submit" class="btn btn-primary w-50">Login</button>
+          <button type="submit" class="btn btn-primary w-50">Войти</button>
         </div>
         <hr>
         <p class="text-center mb-3">
-          Don't have an account?
-          <a routerLink="/register" routerLinkActive="true" href="#" class="card-link text-decoration-none">Sign up</a>
+          Нет аккаунта?
+          <a routerLink="/register" routerLinkActive="true" href="#" class="card-link text-decoration-none">Зарегистрироваться</a>
         </p>
       </form>
     </div>

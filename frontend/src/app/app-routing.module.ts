@@ -9,17 +9,21 @@ import {BudgetListPageComponent} from "./modules/budget/components/budget-list-p
 import {ProfileModule} from "./modules/profile/profile.module";
 import {UserProfileComponent} from "./modules/profile/components/user-profile/user-profile.component";
 import {BudgetPageComponent} from "./modules/budget/components/budget-page/budget-page.component";
+import {AuthGuard} from "./core/guards/auth.guard";
+import {DefaultPageComponent} from "./core/components/default-page/default-page.component";
 
 const routes: Routes = [
+  { path: '', component: DefaultPageComponent },
   { path: "login", component: LoginPageComponent },
   { path: "register", component: SignupPageComponent },
-  { path: 'budgets', component: BudgetListPageComponent },
-  { path: 'budget', component: BudgetPageComponent },
-  { path: 'profile', component: UserProfileComponent }
+  { path: 'budgets', component: BudgetListPageComponent, canActivate: [AuthGuard] },
+  { path: 'budget', component: BudgetPageComponent, canActivate: [AuthGuard]  },
+  { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard]  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes), LoginModule, RegistrationModule, BudgetModule, ProfileModule],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }

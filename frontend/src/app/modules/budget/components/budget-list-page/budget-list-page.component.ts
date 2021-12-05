@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BudgetModel} from "../../models/budget.model";
 import {BudgetService} from "../../services/budget.service";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {CategoryModel} from "../../models/category.model";
 
@@ -14,8 +14,10 @@ export class BudgetListPageComponent implements OnInit {
 
   budgets!: Array<BudgetModel>;
 
+  errorText = '';
+
   budgetForm = new FormGroup({
-      name: new FormControl('')
+      name: new FormControl('', [Validators.required])
     }
   )
 
@@ -34,6 +36,12 @@ export class BudgetListPageComponent implements OnInit {
   }
 
   onSubmit(): void {
+    if (!this.budgetForm.dirty) {
+      this.errorText = 'Введите значение'
+      return
+    } else {
+      this.errorText = ''
+    }
     this.budgetService.createBudget(this.budgetForm.value.name).subscribe(
       {
         next: value => this.refreshBudgets()

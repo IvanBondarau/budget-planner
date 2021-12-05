@@ -1,30 +1,34 @@
 <div class="container-fluid mt-3">
-  <div class="row">
+  <div class="row mb-2">
     <div class="col-12">
-      <div class="card w-100" style="background: #FAFAFA">
+      <div class="card w-100">
         <div class="card-body">
           <div class="container-fluid d-flex flex-row">
             <h5 class="card-title h-5 mt-2">Бюджет "{{ budget.name }}"</h5>
 
-            <button type="button" class="btn btn-outline-primary ms-3" (click)="saveBudget()">
-              Save
+            <button (click)="saveBudget()" class="btn btn-outline-primary ms-3" type="button">
+              Сохранить
             </button>
           </div>
           <hr>
           <div class="container-fluid row mt-2 px-0 mx-1">
             <div class="col-6">
-              <app-category-card *ngFor="let income of budget.incomes" [category]="income" (removeCard)="removeCategory($event)"></app-category-card>
+              <app-category-card (removeCard)="removeCategory($event)" *ngFor="let income of budget.incomes"
+                                 [category]="income"></app-category-card>
               <div class="card w-100 border-success border-1" style="background: white">
                 <div class="card-body">
-                  <form [formGroup]="addCategoryForm" (ngSubmit)="addCategory(0)">
+                  <form (ngSubmit)="addCategory(0)" [formGroup]="addCategoryForm">
+                    <p class="text-danger">{{this.errorText1}}</p>
                     <div class="row w-100 ms-0">
                       <div class="col-9 my-auto ps-0">
-                        <input type="text" class="form-control" id="name" placeholder="Название" formControlName="name">
+                        <input class="form-control" formControlName="name" id="name" placeholder="Название" type="text">
                       </div>
                       <div class="col-3 my-auto d-flex flex-row-reverse pe-3">
-                        <button type="submit" class="btn btn-outline-success">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                        <button class="btn btn-outline-success" type="submit">
+                          <svg class="bi bi-plus-circle-fill" fill="currentColor" height="16" viewBox="0 0 16 16"
+                               width="16" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
                           </svg>
                           <span class="my-auto ms-2">Добавить</span>
                         </button>
@@ -35,18 +39,23 @@
               </div>
             </div>
             <div class="col-6">
-              <app-category-card *ngFor="let expense of budget.expenses" [category]="expense" (removeCard)="removeCategory($event)" ></app-category-card>
+              <app-category-card (removeCard)="removeCategory($event)" *ngFor="let expense of budget.expenses"
+                                 [category]="expense"></app-category-card>
               <div class="card w-100 border-success border-1" style="background: white">
                 <div class="card-body">
-                  <form [formGroup]="addCategoryForm" (ngSubmit)="addCategory(1)">
+                  <form (ngSubmit)="addCategory(1)" [formGroup]="addCategoryForm">
+                    <p class="text-danger">{{this.errorText2}}</p>
                     <div class="row w-100 ms-0">
                       <div class="col-9 my-auto ps-0">
-                        <input type="text" class="form-control" id="cat_name" placeholder="Название" formControlName="name">
+                        <input class="form-control" formControlName="name" id="cat_name" placeholder="Название"
+                               type="text">
                       </div>
                       <div class="col-3 my-auto d-flex flex-row-reverse pe-3">
-                        <button type="submit" class="btn btn-outline-success">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                        <button class="btn btn-outline-success" type="submit">
+                          <svg class="bi bi-plus-circle-fill" fill="currentColor" height="16" viewBox="0 0 16 16"
+                               width="16" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
                           </svg>
                           <span class="my-auto ms-2">Добавить</span>
                         </button>
@@ -62,33 +71,100 @@
         </div>
       </div>
     </div>
-    <div class="col-12">
-      <div class="card w-100">
-        <div class="card-body row">
-          <div class="col-6" style="height: 300px">
-            <ngx-charts-pie-chart
-              [results]="incomesTotal"
-              [scheme]="'forest'"
-              [animations]="false"
-              [legend]="true"
-              [legendTitle]="'Легенда'"
-              [maxLabelLength]="20"
-            >
+  </div>
 
-            </ngx-charts-pie-chart>
+  <div class="row mb-2">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Итоги</h5>
+          <div class="row mb-2">
+            <div class="col-4">
+              <label for="income" class="form-label">Доходы</label>
+              <input class="form-control" id="income" placeholder="Результат" type="text" [attr.value]="totalIncome" readonly>
+            </div>
+            <div class="col-4">
+              <label for="expense"  class="form-label">Расходы</label>
+              <input class="form-control" id="expense" placeholder="Результат" type="text" [attr.value]="totalExpense" readonly>
+            </div>
+            <div class="col-4">
+              <label for="total"  class="form-label">Итого</label>
+              <input class="form-control" id="total" placeholder="Результат" type="text" [attr.value]="totalBudget" readonly>
+            </div>
           </div>
-          <div class="col-6">
-            <ngx-charts-pie-chart
-              [results]="expensesTotal"
-              [scheme]="'flame'"
-              [animations]="false"
-              [legend]="true"
-              [legendTitle]="'Легенда'"
-              [maxLabelLength]="20"
-            ></ngx-charts-pie-chart>
+          <div class="row">
+            <div class="col-4">
+              <label for="expected" class="form-label">Желаемая сумма</label>
+              <input
+                class="form-control"
+                id="expected"
+                placeholder="Сумма"
+                type="number"
+                value="100"
+                [formControl]="expectedControl"
+                (change)="updateResult()">
+            </div>
+            <div class="col-8">
+              <label for="result" class="form-label">Время накопления</label>
+              <input class="form-control" id="result" placeholder="Результат" type="text" value="10 месяцев" [formControl]="resultControl" readonly>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="row mb-2">
+    <div class="col-12">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title">Графики</h5>
+          <div class="row">
+            <div class="col-6" style="height: 300px">
+              <ngx-charts-pie-chart
+                [animations]="false"
+                [legendTitle]="'Легенда'"
+                [legend]="true"
+                [maxLabelLength]="20"
+                [results]="incomesTotal"
+                [scheme]="'forest'"
+              >
+              </ngx-charts-pie-chart>
+            </div>
+            <div class="col-6">
+              <ngx-charts-pie-chart
+                [animations]="false"
+                [legendTitle]="'Легенда'"
+                [legend]="true"
+                [maxLabelLength]="20"
+                [results]="expensesTotal"
+                [scheme]="'flame'"
+              ></ngx-charts-pie-chart>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6" style="height: 300px">
+              <ngx-charts-pie-grid
+                [animations]="false"
+                [results]="incomesTotal"
+                [scheme]="'forest'"
+              >
+
+              </ngx-charts-pie-grid>
+            </div>
+            <div class="col-6" style="height: 300px">
+              <ngx-charts-pie-grid
+                [animations]="false"
+                [results]="expensesTotal"
+                [scheme]="'flame'"
+              >
+
+              </ngx-charts-pie-grid>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

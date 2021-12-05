@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CategoryModel} from "../../models/category.model";
 import {BudgetItemModel} from "../../models/budget-item.model";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-category-card',
@@ -15,9 +15,11 @@ export class CategoryCardComponent implements OnInit {
   @Output() removeCard = new EventEmitter<CategoryModel>();
 
   addItemForm = new FormGroup({
-    name: new FormControl(),
-    value: new FormControl(),
+    name: new FormControl('', [Validators.required]),
+    value: new FormControl('', [Validators.required, Validators.min(0), Validators.max(1000000)]),
   })
+
+  errorText = ''
 
   constructor() { }
 
@@ -30,6 +32,13 @@ export class CategoryCardComponent implements OnInit {
   }
 
   addItem() {
+    if (!(this.addItemForm.controls['name'].dirty && this.addItemForm.controls['value'].dirty)) {
+      this.errorText = 'Введите значение'
+      return
+    } else {
+      this.errorText = ''
+    }
+
     this.category.items.push(
       new BudgetItemModel(
         null,

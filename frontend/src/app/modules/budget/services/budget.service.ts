@@ -47,8 +47,8 @@ export class BudgetService {
   }
 
 
-  getBudgetInfo(id: number) {
-    return this.httpClient.get<BudgetInfoModel>(environment.apiHost + "/budget/" + id);
+  async getBudgetInfo(id: number) {
+    return await this.httpClient.get<BudgetInfoModel>(environment.apiHost + "/budget/" + id).toPromise();
   }
 
   save(budget: BudgetInfoModel) {

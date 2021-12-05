@@ -69,10 +69,10 @@
       <form [formGroup]="addItemForm" (ngSubmit)="addItem()">
         <div class="row w-100 ms-0">
           <div class="col-5 my-auto ps-0">
-            <input type="text" class="form-control" id="name" placeholder="Name" formControlName="name">
+            <input type="text" class="form-control" id="name" placeholder="Имя" formControlName="name">
           </div>
           <div class="col-4 my-auto ps-0">
-            <input type="text" class="form-control" id="value" placeholder="Value" formControlName="value">
+            <input type="number" class="form-control" id="value" placeholder="Значение" formControlName="value">
           </div>
           <div class="col-3 my-auto d-flex flex-row-reverse pe-3">
               <button type="submit" class="btn btn-success">
@@ -82,6 +82,11 @@
                 </svg>
               </button>
           </div>
+        </div>
+        <div class="row">
+          <p class="text-center text-danger">
+            {{this.errorText}}
+          </p>
         </div>
       </form>
 
